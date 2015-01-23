@@ -1,6 +1,7 @@
 library(dplyr)
+library(tidyr)
 
-run_analysis <- function() {
+create_measurement_mean_dataset <- function() {
   features <- read.table("features.txt", col.names = c("column_index", "name"))
   activity_labels <- read.table("activity_labels.txt", col.names = c("id", "label"))
   
@@ -16,14 +17,14 @@ run_analysis <- function() {
   training_data <- load_activity_dataset("train/X_train.txt", "train/y_train.txt", "train/subject_train.txt")
   test_data <- load_activity_dataset("test/X_test.txt", "test/y_test.txt", "test/subject_test.txt")
   
-  combined_data <- rbind_list(training_data, test_data)
-  combined_data <- select(combined_data, subject_id, activity, contains("std()"), contains("mean()"))
-  combined_data <- mutate(combined_data, activity=factor(activity, levels=activity_labels$id, labels=activity_labels$label))
-  combined_data <- gather(combined_data, measurement, value, -subject_id, -activity)
-  combined_data <- summarize(group_by(combined_data, subject_id, activity, measurement), measurement_mean=mean(value))
-  return(combined_data)
+  measurement_mean_by_subject_and_activity <- rbind_list(training_data, test_data) %>%
+    select(subject_id, activity, contains("std()"), contains("mean()")) %>%
+    mutate(activity=factor(activity, levels=activity_labels$id, labels=activity_labels$label)) %>%
+    gather(measurement, value, -subject_id, -activity) %>%
+    group_by(subject_id, activity, measurement) %>%
+    summarize(measurement_mean=mean(value))
+
+  write.table(measurement_mean_by_subject_and_activity, file = "measurement_mean_by_subject_and_activity.txt", row.names = FALSE)
 }
 
-combined_data <- run_analysis()
-
-# subject, activity, variable, mean
+create_measurement_mean_dataset()
