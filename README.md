@@ -1,0 +1,7 @@
+This repository contains scripts for summarizing the "Human Activity Recognition Using Smartphones" data set.
+
+| file           | description                                                                                                                                                                                                                                                                                                                             |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| run_analysis.R | Loads the "Human Activity Recognition Using Smartphones" data set and generates a "measurement_mean_by_subject_and_activity.txt" file that summarizes the mean and standard deviation measurements in the original data set.   Assumes the "Human Activity Recognition Using Smartphones" data set is present in the working directory. |
+| CodeBook.md    | Describes the summary data set.                                                                                                                                                                                                                                                                                                         |
+
