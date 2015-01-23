@@ -17,7 +17,10 @@ run_analysis <- function() {
   test_data <- load_activity_dataset("test/X_test.txt", "test/y_test.txt", "test/subject_test.txt")
   
   combined_data <- rbind_list(training_data, test_data)
+  combined_data <- select(combined_data, subject_id, activity, contains("std()"), contains("mean()"))
   combined_data <- mutate(combined_data, activity=factor(activity, levels=activity_labels$id, labels=activity_labels$label))
+  combined_data <- gather(combined_data, measurement, value, -subject_id, -activity)
+  combined_data <- summarize(group_by(combined_data, subject_id, activity, measurement), measurement_mean=mean(value))
   return(combined_data)
 }
 
