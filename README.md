@@ -1,4 +1,4 @@
-This repository contains scripts for summarizing the "Human Activity Recognition Using Smartphones" data set.
+This repository contains scripts for summarizing the "Human Activity Recognition Using Smartphones" data set found at http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
 | file           | description                                                                                                                                                                                                                                                                                                                             |
 |----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
